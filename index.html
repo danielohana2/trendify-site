@@ -513,11 +513,23 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 }
 
 /* ================= LUCKY WHEEL ================= */
-.wheel-fab{position:fixed;z-index:70;bottom:20px;left:20px;display:flex;align-items:center;gap:8px;padding:10px 16px 10px 12px;border-radius:999px;font-weight:800;
-  background:linear-gradient(135deg,#ffd166,#ff8a3d);color:#1b0b00;box-shadow:0 14px 34px -10px rgba(255,138,61,.9);animation:fabwiggle 4s ease-in-out infinite}
-.fab-wheel{font-size:1.5rem;display:inline-block;animation:spin 6s linear infinite}
-@keyframes fabwiggle{0%,86%,100%{transform:none}90%{transform:rotate(-6deg) scale(1.06)}94%{transform:rotate(6deg) scale(1.06)}}
-@media (max-width:960px){.wheel-fab{bottom:96px;left:12px;padding:10px}.fab-txt{display:none}}
+.wheel-fab{position:fixed;z-index:70;bottom:22px;left:22px;display:flex;align-items:center;gap:12px;padding:8px 20px 8px 8px;border-radius:999px;text-align:right;
+  background:linear-gradient(115deg,#ffe29a,#ffb347 40%,#ff5fa2 80%,#c21cf0);background-size:220% 100%;color:#1b0b00;isolation:isolate;overflow:visible;
+  box-shadow:0 16px 40px -10px rgba(255,95,162,.9),0 0 0 3px rgba(255,255,255,.25) inset;animation:gradmove 4s ease infinite,fabwiggle 5s ease-in-out infinite;transition:transform .2s}
+.wheel-fab::before{content:"";position:absolute;inset:-6px;border-radius:999px;border:2px solid rgba(255,209,102,.9);animation:ringpulse 1.8s ease-out infinite;z-index:-1}
+.wheel-fab:hover{transform:translateY(-3px) scale(1.04)}
+.fab-ring{position:relative;flex:none;width:52px;height:52px;border-radius:50%;padding:3px;background:#1b0b00;box-shadow:0 4px 12px rgba(0,0,0,.4)}
+.fab-ring i{display:block;width:100%;height:100%;border-radius:50%;animation:spin 3.5s linear infinite;
+  background:conic-gradient(#7b2ff7 0 45deg,#ffd166 45deg 90deg,#c21cf0 90deg 135deg,#ff2e9a 135deg 180deg,#7b2ff7 180deg 225deg,#ffd166 225deg 270deg,#9b1fd6 270deg 315deg,#ff2e9a 315deg 360deg)}
+.fab-ring::after{content:"\1F381";position:absolute;inset:0;display:grid;place-items:center;font-size:1.2rem;filter:drop-shadow(0 2px 3px rgba(0,0,0,.5))}
+.fab-txt{display:flex;flex-direction:column;line-height:1.15}
+.fab-txt b{font-size:1.08rem;font-weight:900}
+.fab-txt small{font-size:.78rem;font-weight:700;opacity:.85}
+.fab-badge{position:absolute;top:-8px;right:-6px;min-width:26px;height:26px;padding:0 7px;border-radius:999px;display:grid;place-items:center;font-family:var(--font-num);font-weight:800;font-size:.85rem;
+  background:#ff2e63;color:#fff;box-shadow:0 0 0 3px #0a0716,0 4px 10px rgba(255,46,99,.8);animation:pop 1.6s ease-in-out infinite alternate}
+.wheel-fab.used .fab-badge{background:#22c55e;box-shadow:0 0 0 3px #0a0716}
+@keyframes fabwiggle{0%,84%,100%{rotate:0deg}88%{rotate:-5deg}92%{rotate:5deg}96%{rotate:-3deg}}
+@media (max-width:960px){.wheel-fab{bottom:94px;left:12px;padding:6px 14px 6px 6px;gap:9px}.fab-ring{width:42px;height:42px}.fab-txt b{font-size:.95rem}.fab-txt small{font-size:.7rem}}
 
 .wheel-modal{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:16px}
 .wheel-modal[hidden]{display:none}
@@ -551,6 +563,13 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 .wheel-spin,.wheel-claim{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin-top:14px;padding:18px;border-radius:18px;font-weight:900;font-size:1.2rem;
   background:linear-gradient(115deg,#7b2ff7,#c21cf0 45%,#ff2e9a);color:#fff;box-shadow:0 18px 40px -14px rgba(255,46,154,.9);transition:transform .2s,opacity .2s}
 .wheel-spin:hover,.wheel-claim:hover{transform:translateY(-2px) scale(1.01)}
+.wheel-spin{position:relative;overflow:hidden;isolation:isolate;background:linear-gradient(115deg,#7b2ff7,#c21cf0 35%,#ff2e9a 65%,#ffb347);background-size:220% 100%;font-size:1.3rem}
+.wheel-spin::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);transform:translateX(120%);animation:shine 2.2s ease-in-out infinite;z-index:-1}
+.wheel-spin:not(:disabled){animation:gradmove 3s ease infinite,spinpulse 1.4s ease-in-out infinite}
+@keyframes spinpulse{50%{transform:scale(1.035);box-shadow:0 0 0 8px rgba(255,46,154,.18),0 22px 50px -14px rgba(255,46,154,1)}}
+.wheel-tries{display:inline-block;margin-top:12px;padding:8px 16px;border-radius:14px;background:rgba(255,46,99,.12);border:1px dashed rgba(255,95,130,.6);color:#ffb3c4;font-weight:800;font-size:.95rem}
+.wheel-tries b{color:#fff}
+.wheel-timer{display:block;margin-top:6px;font-family:var(--font-num);font-size:1.5rem;font-weight:800;color:#fff;letter-spacing:.04em}
 .wheel-spin:disabled{opacity:.55;cursor:wait;transform:none}
 .wheel-claim{background:linear-gradient(115deg,#22c55e,#16a34a);box-shadow:0 18px 40px -14px rgba(34,197,94,.9);animation:pulseclaim 1.6s infinite}
 .wheel-claim[hidden],.wheel-spin[hidden]{display:none}
@@ -947,7 +966,9 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 
 <!-- ================= LUCKY WHEEL ================= -->
 <button type="button" class="wheel-fab" id="wheelFab" aria-haspopup="dialog" aria-controls="wheelModal">
-  <span class="fab-wheel" aria-hidden="true">🎡</span><span class="fab-txt">גלגל המזל</span>
+  <span class="fab-ring" aria-hidden="true"><i></i></span>
+  <span class="fab-txt"><b id="fabTitle">תנסו את המזל!</b><small id="fabSub">ניסיון אחד בחינם 🍀</small></span>
+  <span class="fab-badge" id="fabBadge" aria-hidden="true">1</span>
 </button>
 
 <div class="wheel-modal" id="wheelModal" role="dialog" aria-modal="true" aria-labelledby="wheelTitle" aria-describedby="wheelSub" hidden>
@@ -957,6 +978,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
     <div class="wheel-ribbon">🍀 רק למבקרים באתר</div>
     <h2 id="wheelTitle">תנסו את המזל!</h2>
     <p id="wheelSub">חבילות עוקבים במחירי צחוק. סובבו את הגלגל וגלו מה מחכה לכם.</p>
+    <div class="wheel-tries" id="wheelTries">🎟️ יש לכם <b>ניסיון אחד בלבד</b></div>
 
     <div class="wheel-stage">
       <div class="wheel-pointer" aria-hidden="true"></div>
@@ -971,7 +993,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
       <svg class="wa" aria-hidden="true"><use href="#i-wa"/></svg>
       <span>🎁 לממש את הזכייה שלי</span>
     </a>
-    <p class="wheel-fine" id="wheelFine">סיבוב אחד לכל מבקר · הזכייה נשמרת עבורכם</p>
+    <p class="wheel-fine" id="wheelFine">ניסיון אחד בכל 24 שעות · הזכייה נשמרת עבורכם</p>
   </div>
 </div>
 
@@ -1260,7 +1282,9 @@ function waText(msg){
 (()=>{
   const modal=document.getElementById('wheelModal'), fab=document.getElementById('wheelFab'), wheel=document.getElementById('wheel'),
         spinBtn=document.getElementById('wheelSpin'), claim=document.getElementById('wheelClaim'), result=document.getElementById('wheelResult'),
-        lights=document.getElementById('wheelLights'), fine=document.getElementById('wheelFine');
+        lights=document.getElementById('wheelLights'), fine=document.getElementById('wheelFine'), tries=document.getElementById('wheelTries'),
+        fabTitle=document.getElementById('fabTitle'), fabSub=document.getElementById('fabSub'), fabBadge=document.getElementById('fabBadge');
+  const DAY=24*60*60*1000; let timerIv=null;
   // segments: q = followers (0 = extra spin)
   const SEG=[{q:1000},{q:0},{q:5000},{q:15000},{q:10000},{q:0},{q:20000},{q:10000}];
   const FILLS=['#7b2ff7','#ffb347','#c21cf0','#3b1d8f','#ff2e9a','#ffb347','#9b1fd6','#e0218a'];
@@ -1282,6 +1306,22 @@ function waText(msg){
   const load=()=>{try{return JSON.parse(localStorage.getItem(KEY))||{stage:0}}catch(e){return {stage:0}}};
   const save=st=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}};
   let st=load(), rot=0, spinning=false, lastFocus=null;
+  function expired(){return !!st.ts && Date.now()-st.ts>=DAY}
+  if(expired()){st={stage:0};save(st)}
+  const pad=n=>String(n).padStart(2,'0');
+  function left(){const ms=Math.max(0,st.ts+DAY-Date.now());const t=Math.floor(ms/1000);return pad(Math.floor(t/3600))+':'+pad(Math.floor(t%3600/60))+':'+pad(t%60)}
+  function updateFab(){
+    if(st.stage===2){fab.classList.add('used');fabTitle.textContent='הזכייה שלכם 🎁';fabSub.textContent='לחצו למימוש בוואטסאפ';fabBadge.textContent='✓'}
+    else if(st.stage===1){fab.classList.remove('used');fabTitle.textContent='יש לכם סיבוב נוסף!';fabSub.textContent='המזל מחכה לכם 🍀';fabBadge.textContent='1'}
+    else {fab.classList.remove('used');fabTitle.textContent='תנסו את המזל!';fabSub.textContent='ניסיון אחד בחינם 🍀';fabBadge.textContent='1'}
+  }
+  function tick24(){
+    clearInterval(timerIv);
+    if(st.stage!==2) return;
+    const draw=()=>{ if(expired()){clearInterval(timerIv);st={stage:0};save(st);render();return}
+      tries.innerHTML='⏳ ניצלתם את הניסיון. ניסיון חדש בעוד<span class="wheel-timer num">'+left()+'</span>'};
+    draw(); timerIv=setInterval(draw,1000);
+  }
 
   function rotateTo(idx,instant){
     const c=idx*A+A/2, jitter=(Math.random()-.5)*(A*.55);
@@ -1296,9 +1336,11 @@ function waText(msg){
     const p=priceFor(q),o=p+FAKE_MARKUP;
     result.innerHTML=`<div class="win">🎉 המזל איתכם! זכיתם ב:<b>${fmt(q)} עוקבים</b><span class="pp num">${p}₪<s>${o}₪</s></span></div>`;
     spinBtn.hidden=true; claim.hidden=false; claim.href=waText(prizeMsg(q));
-    fine.textContent='הזכייה שמורה עבורכם. לחצו כדי לשלוח אותה אלינו בוואטסאפ';
+    fine.textContent='הזכייה שמורה עבורכם ל-24 שעות. לחצו כדי לשלוח אותה אלינו בוואטסאפ';
   }
   function render(){
+    updateFab(); tries.innerHTML=st.stage===1?'🎟️ זה עדיין <b>הניסיון היחיד שלכם</b>: בונוס סיבוב!':'🎟️ יש לכם <b>ניסיון אחד בלבד</b>';
+    fine.textContent='ניסיון אחד בכל 24 שעות · הזכייה נשמרת עבורכם';
     result.innerHTML=''; claim.hidden=true; spinBtn.hidden=false; spinBtn.disabled=false;
     if(st.stage===0){spinBtn.textContent='🎰 סובבו את הגלגל'}
     else if(st.stage===1){result.innerHTML='<div class="again">🔄 זכיתם בסיבוב נוסף! המזל מחייך אליכם</div>';spinBtn.textContent='🍀 לסיבוב הנוסף'}
@@ -1312,8 +1354,8 @@ function waText(msg){
     rotateTo(idx,reduceMotion);
     setTimeout(()=>{
       spinning=false;
-      if(st.stage===0){st={stage:1};save(st);render();confetti(40)}
-      else {st={stage:2,prize:idx};save(st);render();confetti(120)}
+      if(st.stage===0){st={stage:1,ts:Date.now()};save(st);render();confetti(40)}
+      else {st={stage:2,prize:idx,ts:st.ts||Date.now()};save(st);render();tick24();confetti(120)}
     }, reduceMotion?50:5300);
   }
   function confetti(n){
@@ -1327,11 +1369,11 @@ function waText(msg){
   function open(){
     if(!modal.hidden) return; lastFocus=document.activeElement; modal.hidden=false; document.body.style.overflow='hidden';
     if(st.stage===2) rotateTo(st.prize,true);
-    render(); setTimeout(()=>(st.stage===2?claim:spinBtn).focus(),60);
+    render(); tick24(); setTimeout(()=>(st.stage===2?claim:spinBtn).focus(),60);
     try{sessionStorage.setItem('trendify_wheel_seen','1')}catch(e){}
   }
   function close(){modal.hidden=true;document.body.style.overflow='';if(lastFocus&&lastFocus.focus)lastFocus.focus()}
-  fab.onclick=open; spinBtn.onclick=spin;
+  fab.onclick=open; spinBtn.onclick=spin; updateFab();
   modal.querySelectorAll('[data-close]').forEach(el=>el.addEventListener('click',close));
   modal.addEventListener('keydown',e=>{
     if(e.key==='Escape'){close();return}
