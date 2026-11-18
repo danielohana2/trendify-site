@@ -435,6 +435,131 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 /* click burst */
 .burst{position:fixed;pointer-events:none;z-index:9999;display:grid;place-items:center;border-radius:50%;color:#fff;font-weight:800;font-family:var(--font-num);will-change:transform,opacity}
 
+/* ================= DEAL ZONE ================= */
+:root{--gold:#ffd166;--orange:#ff8a3d}
+.gold-text{background:linear-gradient(100deg,#ffe29a,#ffb347 45%,#ff5fa2);-webkit-background-clip:text;background-clip:text;color:transparent}
+.deal{padding:110px 0}
+.board{margin-top:56px;display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;align-items:center;padding:40px;border-radius:34px;position:relative;
+  background:radial-gradient(600px 300px at 20% 10%,rgba(255,209,102,.12),transparent 70%),linear-gradient(160deg,#1a1230,#0c0820);
+  border:1.5px solid rgba(255,209,102,.35);box-shadow:0 0 0 6px rgba(255,209,102,.05),0 40px 90px -40px rgba(255,138,61,.5)}
+.board::before{content:"";position:absolute;inset:10px;border-radius:26px;pointer-events:none;
+  background:repeating-linear-gradient(90deg,rgba(255,209,102,.22) 0 14px,transparent 14px 28px) top/100% 3px no-repeat,
+             repeating-linear-gradient(90deg,rgba(255,209,102,.22) 0 14px,transparent 14px 28px) bottom/100% 3px no-repeat}
+.board-gauge{position:relative;width:min(340px,100%);aspect-ratio:1;margin:auto}
+.gauge{width:100%;height:100%;transform:rotate(-90deg);overflow:visible}
+.g-bg{fill:none;stroke:rgba(255,255,255,.07);stroke-width:18}
+.g-fg{fill:none;stroke:url(#gGold);stroke-width:18;stroke-linecap:round;transition:stroke-dashoffset .5s cubic-bezier(.2,.8,.2,1);filter:drop-shadow(0 0 12px rgba(255,138,61,.7))}
+.g-inner{fill:rgba(255,255,255,.03);stroke:rgba(255,209,102,.18);stroke-dasharray:2 7;stroke-width:2}
+.gauge-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.g-label{color:var(--muted);font-size:.95rem;font-weight:600}
+.g-num{font-size:clamp(2.6rem,6vw,3.6rem);font-weight:800;line-height:1.05;background:linear-gradient(180deg,#fff,#ffd9a0);-webkit-background-clip:text;background-clip:text;color:transparent}
+.g-unit{color:var(--gold);font-weight:700}
+
+.chance{perspective:900px;border-radius:20px;padding:18px 22px;background:linear-gradient(135deg,#ff9f43,#ff6b35);color:#2a1200;position:relative;
+  box-shadow:0 18px 40px -18px rgba(255,107,53,.9),inset 0 0 0 2px rgba(255,255,255,.35);transform-origin:center}
+.chance::after{content:"?";position:absolute;left:16px;top:50%;transform:translateY(-50%) rotate(-12deg);font-family:var(--font-num);font-size:5rem;font-weight:800;color:rgba(255,255,255,.22);line-height:1}
+.chance-head{font-size:.8rem;font-weight:800;letter-spacing:.12em;opacity:.8}
+.chance h3{font-size:1.45rem;font-weight:900;margin:2px 0 2px;color:#1b0b00;position:relative;z-index:1}
+.chance p{font-weight:600;font-size:1.02rem;position:relative;z-index:1;max-width:90%}
+.chance.flip{animation:flipcard .6s cubic-bezier(.3,1.3,.5,1)}
+@keyframes flipcard{0%{transform:rotateX(0)}45%{transform:rotateX(90deg) scale(.96)}100%{transform:rotateX(0)}}
+
+.range2-wrap{margin:30px 0 8px}
+.range2{-webkit-appearance:none;appearance:none;width:100%;height:12px;border-radius:999px;cursor:pointer;
+  background:linear-gradient(to left,#ffd166 0%,#ff8a3d calc(var(--p)*.6),#ff2e9a var(--p),rgba(255,255,255,.09) var(--p));
+  box-shadow:inset 0 1px 3px rgba(0,0,0,.6)}
+.range2:focus-visible{outline:3px solid var(--gold);outline-offset:8px}
+.range2::-webkit-slider-thumb{-webkit-appearance:none;width:46px;height:46px;border-radius:50%;cursor:grab;
+  background:radial-gradient(circle at 35% 30%,#fff6d5,#ffd166 40%,#e09b1a 75%,#a86b00);
+  box-shadow:0 0 0 4px rgba(255,209,102,.3),0 0 26px rgba(255,209,102,.7),inset 0 -3px 0 rgba(0,0,0,.2)}
+.range2::-moz-range-thumb{width:46px;height:46px;border:0;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff6d5,#ffd166 40%,#e09b1a 75%,#a86b00);box-shadow:0 0 0 4px rgba(255,209,102,.3),0 0 26px rgba(255,209,102,.7)}
+.props{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:18px}
+.prop{border-radius:12px;background:#f6f1e3;color:#1a1300;overflow:hidden;text-align:center;padding-bottom:8px;font-weight:800;transition:transform .25s,box-shadow .25s;
+  box-shadow:0 8px 18px -10px rgba(0,0,0,.8);min-height:44px}
+.prop::before{content:"";display:block;height:12px;background:var(--c);margin-bottom:6px}
+.prop .q{display:block;font-family:var(--font-num);font-size:1rem}
+.prop .pr{display:block;font-size:.78rem;color:#6b5a2e;font-weight:700}
+.prop:hover{transform:translateY(-4px)}
+.prop.on{transform:translateY(-8px) rotate(-2deg);box-shadow:0 0 0 3px var(--gold),0 16px 30px -10px rgba(255,209,102,.7)}
+
+.deal-price{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:26px}
+.dp-old{display:block;font-size:1.4rem;color:var(--dim);text-decoration:line-through;text-decoration-color:#ff5f5f;text-decoration-thickness:3px}
+.dp-now{display:block;font-size:clamp(3.2rem,7vw,4.4rem);font-weight:800;line-height:1;color:#fff;text-shadow:0 0 34px rgba(255,209,102,.45)}
+.dp-now small{font-size:.5em;margin-inline-start:4px;color:var(--gold)}
+.dp-now.bump{animation:flash .5s}
+.stamp{flex:none;width:104px;height:104px;border-radius:50%;display:grid;place-items:center;text-align:center;line-height:1.2;font-weight:800;font-size:.85rem;
+  color:#ffd166;border:3px dashed rgba(255,209,102,.8);transform:rotate(-14deg);background:rgba(255,209,102,.08);box-shadow:0 0 0 6px rgba(255,209,102,.06)}
+.stamp b{font-size:1.5rem;color:#fff}
+.stamp.bump{animation:stamp .45s cubic-bezier(.2,1.6,.4,1)}
+@keyframes stamp{from{transform:rotate(-14deg) scale(1.5);opacity:.2}}
+.dp-per{color:var(--muted);margin-top:8px;font-size:.95rem}
+.cta-gold{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:22px;padding:20px;border-radius:20px;font-weight:900;font-size:1.25rem;color:#1b0b00;position:relative;overflow:hidden;isolation:isolate;
+  background:linear-gradient(115deg,#ffe29a,#ffb347 45%,#ff7a59);box-shadow:0 20px 44px -16px rgba(255,138,61,.95),inset 0 1px 0 rgba(255,255,255,.6),inset 0 -3px 0 rgba(0,0,0,.15);transition:transform .2s}
+.cta-gold::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.7) 50%,transparent 70%);transform:translateX(120%);animation:shine 2.8s ease-in-out infinite;z-index:-1}
+.cta-gold:hover{transform:translateY(-3px) scale(1.015)}
+.cta-gold .wa{width:30px;height:30px}
+.cta-gold .wa path{fill:#1b0b00}
+@media (max-width:960px){
+  .board{grid-template-columns:1fr;padding:26px 18px;gap:24px}
+  .board-gauge{width:min(260px,80%)}
+}
+@media (max-width:600px){
+  .deal{padding:72px 0}
+  .props{gap:5px}
+  .prop .q{font-size:.85rem}.prop .pr{font-size:.7rem}
+  .chance h3{font-size:1.25rem}.chance p{font-size:.95rem}
+  .stamp{width:88px;height:88px;font-size:.78rem}.stamp b{font-size:1.25rem}
+  .cta-gold{font-size:1.08rem;padding:18px 14px}
+}
+
+/* ================= LUCKY WHEEL ================= */
+.wheel-fab{position:fixed;z-index:70;bottom:20px;left:20px;display:flex;align-items:center;gap:8px;padding:10px 16px 10px 12px;border-radius:999px;font-weight:800;
+  background:linear-gradient(135deg,#ffd166,#ff8a3d);color:#1b0b00;box-shadow:0 14px 34px -10px rgba(255,138,61,.9);animation:fabwiggle 4s ease-in-out infinite}
+.fab-wheel{font-size:1.5rem;display:inline-block;animation:spin 6s linear infinite}
+@keyframes fabwiggle{0%,86%,100%{transform:none}90%{transform:rotate(-6deg) scale(1.06)}94%{transform:rotate(6deg) scale(1.06)}}
+@media (max-width:960px){.wheel-fab{bottom:96px;left:12px;padding:10px}.fab-txt{display:none}}
+
+.wheel-modal{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:16px}
+.wheel-modal[hidden]{display:none}
+.wheel-backdrop{position:absolute;inset:0;background:rgba(5,3,18,.78);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);animation:fadein .3s}
+@keyframes fadein{from{opacity:0}}
+.wheel-card{position:relative;width:min(440px,100%);max-height:calc(100vh - 32px);overflow:auto;text-align:center;padding:30px 24px 22px;border-radius:30px;
+  background:radial-gradient(500px 260px at 50% 0%,rgba(255,209,102,.22),transparent 70%),linear-gradient(170deg,#1d1238,#0b0820);
+  border:1.5px solid rgba(255,209,102,.45);box-shadow:0 40px 100px -30px rgba(0,0,0,.9),0 0 80px -20px rgba(255,138,61,.5);animation:popin .55s cubic-bezier(.2,1.5,.4,1)}
+@keyframes popin{from{transform:scale(.6) translateY(40px);opacity:0}}
+.wheel-x{position:absolute;top:12px;left:12px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.08);font-size:1rem;color:var(--muted)}
+.wheel-x:hover{background:rgba(255,255,255,.16);color:#fff}
+.wheel-ribbon{display:inline-block;padding:5px 14px;border-radius:999px;background:rgba(46,229,157,.14);border:1px solid rgba(46,229,157,.4);color:#6ff5c0;font-weight:800;font-size:.82rem}
+.wheel-card h2{font-size:2rem;font-weight:900;margin-top:8px;background:linear-gradient(100deg,#ffe29a,#ffb347 50%,#ff5fa2);-webkit-background-clip:text;background-clip:text;color:transparent}
+.wheel-card > p{color:var(--muted);font-size:1rem}
+.wheel-stage{position:relative;width:min(300px,78vw);aspect-ratio:1;margin:20px auto 6px}
+.wheel{width:100%;height:100%;border-radius:50%;transition:transform 5.2s cubic-bezier(.12,.75,.12,1);box-shadow:0 0 0 8px #2a1d47,0 0 0 11px rgba(255,209,102,.7),0 20px 50px -10px rgba(0,0,0,.8)}
+.wheel text{font-family:'Outfit','Heebo',sans-serif;font-weight:800;fill:#fff;pointer-events:none}
+.wheel-pointer{position:absolute;top:-16px;left:50%;transform:translateX(-50%);z-index:3;width:0;height:0;border-left:16px solid transparent;border-right:16px solid transparent;border-top:30px solid #ffd166;filter:drop-shadow(0 4px 6px rgba(0,0,0,.6))}
+.wheel-hub{position:absolute;inset:0;margin:auto;width:64px;height:64px;border-radius:50%;background:#0d0a24;display:grid;place-items:center;z-index:2;box-shadow:0 0 0 4px #ffd166,0 6px 16px rgba(0,0,0,.6)}
+.wheel-hub img{width:44px;height:44px}
+.wheel-lights{position:absolute;inset:-11px;border-radius:50%;pointer-events:none;z-index:1}
+.wheel-lights i{position:absolute;width:8px;height:8px;border-radius:50%;background:#fff3c4;box-shadow:0 0 8px #ffd166;animation:blink 1s infinite}
+.wheel-lights i:nth-child(odd){animation-delay:.5s}
+@keyframes blink{50%{opacity:.25}}
+.wheel-result{min-height:24px;margin-top:10px}
+.wheel-result .win{padding:14px;border-radius:18px;background:rgba(255,209,102,.1);border:1px solid rgba(255,209,102,.4);animation:pop .5s cubic-bezier(.2,1.6,.4,1)}
+.wheel-result .win b{display:block;font-size:1.35rem;color:#fff}
+.wheel-result .win .pp{font-family:var(--font-num);font-size:1.1rem;color:var(--gold);font-weight:800}
+.wheel-result .win .pp s{color:var(--dim);margin-inline-start:8px;font-weight:600}
+.wheel-result .again{font-weight:800;font-size:1.15rem;color:#6ff5c0}
+.wheel-spin,.wheel-claim{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin-top:14px;padding:18px;border-radius:18px;font-weight:900;font-size:1.2rem;
+  background:linear-gradient(115deg,#7b2ff7,#c21cf0 45%,#ff2e9a);color:#fff;box-shadow:0 18px 40px -14px rgba(255,46,154,.9);transition:transform .2s,opacity .2s}
+.wheel-spin:hover,.wheel-claim:hover{transform:translateY(-2px) scale(1.01)}
+.wheel-spin:disabled{opacity:.55;cursor:wait;transform:none}
+.wheel-claim{background:linear-gradient(115deg,#22c55e,#16a34a);box-shadow:0 18px 40px -14px rgba(34,197,94,.9);animation:pulseclaim 1.6s infinite}
+.wheel-claim[hidden],.wheel-spin[hidden]{display:none}
+@media (max-width:600px){.wheel-card{padding:24px 16px 16px}.wheel-card h2{font-size:1.6rem}.wheel-card > p{font-size:.92rem}.wheel-stage{width:min(260px,68vw);margin:14px auto 4px}.wheel-spin,.wheel-claim{padding:15px;font-size:1.08rem}}
+.wheel-claim .wa{width:28px;height:28px}
+@keyframes pulseclaim{50%{box-shadow:0 0 0 10px rgba(34,197,94,0),0 18px 40px -14px rgba(34,197,94,.9)}}
+.wheel-fine{color:var(--dim);font-size:.8rem;margin-top:12px}
+.confetti{position:fixed;top:0;left:0;width:10px;height:14px;z-index:300;pointer-events:none;border-radius:2px}
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
   .reveal{opacity:1;transform:none}
@@ -475,8 +600,9 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
       <span class="word">Trend<span class="grad-text">ify</span><small>ELEVATE YOUR BRAND</small></span>
     </a>
     <nav class="nav-links" aria-label="ניווט ראשי">
-      <a href="#why">למה זה עובד</a>
       <a href="#pricing">חבילות ומחירים</a>
+      <a href="#why">למה זה עובד</a>
+      <a href="#deal">הדיל המטורף</a>
       <a href="#how">איך זה עובד</a>
       <a href="#faq">שאלות נפוצות</a>
     </nav>
@@ -540,70 +666,8 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
   </div>
 </section>
 
-<!-- ================= FIRST IMPRESSION ================= -->
-<section class="section" id="why">
-  <div class="wrap">
-    <div class="split">
-      <div class="reveal">
-        <span class="kicker">רושם ראשוני</span>
-        <div class="big-stat grad-text"><span class="num">3</span><span style="font-size:.35em;margin-inline-start:.15em">שניות</span></div>
-        <p class="big-stat-cap">זה כל הזמן שיש לפרופיל שלך לשכנע מבקר חדש להישאר.</p>
-      </div>
-      <div class="copy reveal">
-        <h2 class="h2">כולם מציצים במספר.<br><span class="grad-text">אף אחד לא מודה בזה.</span></h2>
-        <p>לקוח חדש נכנס לדף העסק שלך בפעם הראשונה. הוא עוד לא ראה את המוצר, לא קרא ביקורת ולא דיבר איתך. אבל העין שלו כבר עשתה את הדבר הראשון שכל אחד עושה – <strong>הסתכלה על כמות העוקבים</strong>.</p>
-        <p>200 עוקבים? המוח מתרגם את זה ל"עסק קטן, אולי לא רציני". <strong>20,000 עוקבים?</strong> פתאום יש סמכות, יש ביקוש, יש סיבה לסמוך. זה לא קשור לאיכות שלך – זה קשור לאיך שמקבלים החלטות.</p>
-        <div class="quote">"אנשים לא עוקבים אחרי תוכן. הם עוקבים אחרי מקום שכבר מלא באנשים."</div>
-      </div>
-    </div>
-
-    <div class="compare reveal" aria-label="השוואה בין פרופיל עם מעט עוקבים לפרופיל עם הרבה עוקבים">
-      <div class="pcard before">
-        <span class="tag">לפני</span>
-        <div class="ig-head">
-          <div class="avatar"><div class="in"><div><img src="assets/logo.svg" alt="" style="filter:grayscale(1);opacity:.5"></div></div></div>
-          <div class="stats">
-            <div><b>31</b><span>posts</span></div>
-            <div><b>214</b><span>followers</span></div>
-            <div><b>480</b><span>following</span></div>
-          </div>
-        </div>
-        <p class="verdict">המבקר חושב: <b>"מי זה? אולי אבדוק מישהו אחר."</b> – יוצא תוך שניות.</p>
-      </div>
-      <div class="vs" aria-hidden="true"><svg><use href="#i-arrow"/></svg></div>
-      <div class="pcard after">
-        <span class="tag">אחרי Trendify</span>
-        <div class="ig-head">
-          <div class="avatar"><div class="in"><div><img src="assets/logo.svg" alt=""></div></div></div>
-          <div class="stats">
-            <div><b>31</b><span>posts</span></div>
-            <div><b class="grad-text">20.2K</b><span>followers</span></div>
-            <div><b>480</b><span>following</span></div>
-          </div>
-        </div>
-        <p class="verdict">המבקר חושב: <b>"וואו, כולם כאן. כנראה שזה שווה."</b> – לוחץ Follow ושולח הודעה.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= PSYCHOLOGY ================= -->
-<section class="section" style="padding-top:20px">
-  <div class="wrap center">
-    <span class="kicker reveal">הפסיכולוגיה שמאחורי המספר</span>
-    <h2 class="h2 reveal">למה עוקבים מביאים <span class="grad-text">עוד עוקבים</span></h2>
-    <p class="sub reveal">זה לא קסם, זו התנהגות אנושית שנחקרה עשרות שנים. כשאתם מגדילים את המספר – אתם מפעילים ארבעה מנגנונים שעובדים בשבילכם 24/7.</p>
-    <div class="cards">
-      <article class="card reveal"><div class="ico"><svg><use href="#i-users"/></svg></div><h3>הוכחה חברתית</h3><p>כשאנחנו לא בטוחים, אנחנו מסתכלים מה אחרים עושים. פרופיל עם אלפי עוקבים אומר למוח: "אחרים כבר בדקו – זה בטוח".</p></article>
-      <article class="card reveal"><div class="ico"><svg><use href="#i-star"/></svg></div><h3>סמכות ואמינות</h3><p>מספר גבוה נתפס כמומחיות. לקוחות משלמים יותר, מתמקחים פחות ומשאירים פרטים מהר יותר כשהעסק "נראה גדול".</p></article>
-      <article class="card reveal"><div class="ico"><svg><use href="#i-trend"/></svg></div><h3>אפקט העדר</h3><p>ככל שיותר אנשים עוקבים, ככה קל יותר לחדשים להצטרף. הצמיחה מזינה את עצמה – כדור שלג שמתגלגל קדימה.</p></article>
-      <article class="card reveal"><div class="ico"><svg><use href="#i-eye"/></svg></div><h3>חשיפה ומעורבות</h3><p>פרופיל שנראה פעיל מקבל יותר כניסות, יותר שמירות ויותר הודעות. ומבקר שנכנס – הוא לקוח פוטנציאלי.</p></article>
-    </div>
-  </div>
-</section>
-
 <!-- ================= PRICING SIMULATOR ================= -->
-<section class="pricing" id="pricing" aria-labelledby="pricingTitle">
+<section class="pricing" id="pricing" style="padding-top:70px" aria-labelledby="pricingTitle">
   <div class="wrap">
     <div class="center">
       <span class="kicker reveal">הסימולטור של Trendify</span>
@@ -689,6 +753,68 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
   </div>
 </section>
 
+<!-- ================= FIRST IMPRESSION ================= -->
+<section class="section" id="why">
+  <div class="wrap">
+    <div class="split">
+      <div class="reveal">
+        <span class="kicker">רושם ראשוני</span>
+        <div class="big-stat grad-text"><span class="num">3</span><span style="font-size:.35em;margin-inline-start:.15em">שניות</span></div>
+        <p class="big-stat-cap">זה כל הזמן שיש לפרופיל שלך לשכנע מבקר חדש להישאר.</p>
+      </div>
+      <div class="copy reveal">
+        <h2 class="h2">כולם מציצים במספר.<br><span class="grad-text">אף אחד לא מודה בזה.</span></h2>
+        <p>לקוח חדש נכנס לדף העסק שלך בפעם הראשונה. הוא עוד לא ראה את המוצר, לא קרא ביקורת ולא דיבר איתך. אבל העין שלו כבר עשתה את הדבר הראשון שכל אחד עושה – <strong>הסתכלה על כמות העוקבים</strong>.</p>
+        <p>200 עוקבים? המוח מתרגם את זה ל"עסק קטן, אולי לא רציני". <strong>20,000 עוקבים?</strong> פתאום יש סמכות, יש ביקוש, יש סיבה לסמוך. זה לא קשור לאיכות שלך – זה קשור לאיך שמקבלים החלטות.</p>
+        <div class="quote">"אנשים לא עוקבים אחרי תוכן. הם עוקבים אחרי מקום שכבר מלא באנשים."</div>
+      </div>
+    </div>
+
+    <div class="compare reveal" aria-label="השוואה בין פרופיל עם מעט עוקבים לפרופיל עם הרבה עוקבים">
+      <div class="pcard before">
+        <span class="tag">לפני</span>
+        <div class="ig-head">
+          <div class="avatar"><div class="in"><div><img src="assets/logo.svg" alt="" style="filter:grayscale(1);opacity:.5"></div></div></div>
+          <div class="stats">
+            <div><b>31</b><span>posts</span></div>
+            <div><b>214</b><span>followers</span></div>
+            <div><b>480</b><span>following</span></div>
+          </div>
+        </div>
+        <p class="verdict">המבקר חושב: <b>"מי זה? אולי אבדוק מישהו אחר."</b> – יוצא תוך שניות.</p>
+      </div>
+      <div class="vs" aria-hidden="true"><svg><use href="#i-arrow"/></svg></div>
+      <div class="pcard after">
+        <span class="tag">אחרי Trendify</span>
+        <div class="ig-head">
+          <div class="avatar"><div class="in"><div><img src="assets/logo.svg" alt=""></div></div></div>
+          <div class="stats">
+            <div><b>31</b><span>posts</span></div>
+            <div><b class="grad-text">20.2K</b><span>followers</span></div>
+            <div><b>480</b><span>following</span></div>
+          </div>
+        </div>
+        <p class="verdict">המבקר חושב: <b>"וואו, כולם כאן. כנראה שזה שווה."</b> – לוחץ Follow ושולח הודעה.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PSYCHOLOGY ================= -->
+<section class="section" style="padding-top:20px">
+  <div class="wrap center">
+    <span class="kicker reveal">הפסיכולוגיה שמאחורי המספר</span>
+    <h2 class="h2 reveal">למה עוקבים מביאים <span class="grad-text">עוד עוקבים</span></h2>
+    <p class="sub reveal">זה לא קסם, זו התנהגות אנושית שנחקרה עשרות שנים. כשאתם מגדילים את המספר – אתם מפעילים ארבעה מנגנונים שעובדים בשבילכם 24/7.</p>
+    <div class="cards">
+      <article class="card reveal"><div class="ico"><svg><use href="#i-users"/></svg></div><h3>הוכחה חברתית</h3><p>כשאנחנו לא בטוחים, אנחנו מסתכלים מה אחרים עושים. פרופיל עם אלפי עוקבים אומר למוח: "אחרים כבר בדקו – זה בטוח".</p></article>
+      <article class="card reveal"><div class="ico"><svg><use href="#i-star"/></svg></div><h3>סמכות ואמינות</h3><p>מספר גבוה נתפס כמומחיות. לקוחות משלמים יותר, מתמקחים פחות ומשאירים פרטים מהר יותר כשהעסק "נראה גדול".</p></article>
+      <article class="card reveal"><div class="ico"><svg><use href="#i-trend"/></svg></div><h3>אפקט העדר</h3><p>ככל שיותר אנשים עוקבים, ככה קל יותר לחדשים להצטרף. הצמיחה מזינה את עצמה – כדור שלג שמתגלגל קדימה.</p></article>
+      <article class="card reveal"><div class="ico"><svg><use href="#i-eye"/></svg></div><h3>חשיפה ומעורבות</h3><p>פרופיל שנראה פעיל מקבל יותר כניסות, יותר שמירות ויותר הודעות. ומבקר שנכנס – הוא לקוח פוטנציאלי.</p></article>
+    </div>
+  </div>
+</section>
+
 <!-- ================= HOW ================= -->
 <section class="section" id="how" style="padding-top:20px">
   <div class="wrap center">
@@ -719,6 +845,64 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
         <li><svg><use href="#i-check"/></svg><span><b>יתרון על המתחרים</b> – כשמשווים ביניכם, אתם נראים כמו המובילים.</span></li>
         <li><svg><use href="#i-check"/></svg><span><b>שיתופי פעולה ומותגים</b> – מספרים גבוהים פותחים דלתות.</span></li>
       </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DEAL ZONE ================= -->
+<section class="deal" id="deal" aria-labelledby="dealTitle">
+  <div class="wrap">
+    <div class="center">
+      <span class="kicker reveal" style="color:var(--gold)">אזור הדילים</span>
+      <h2 class="h2 reveal" id="dealTitle">שחקו עם הכמות – <span class="gold-text">תפסו את הדיל</span></h2>
+      <p class="sub reveal">כל כמות פותחת קלף הזדמנות חדש. ככל שעולים בסקאלה, המחיר לכל אלף עוקבים יורד.</p>
+    </div>
+
+    <div class="board reveal">
+      <div class="board-gauge">
+        <svg class="gauge" viewBox="0 0 260 260" aria-hidden="true">
+          <defs>
+            <linearGradient id="gGold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd166"/><stop offset=".5" stop-color="#ff8a3d"/><stop offset="1" stop-color="#ff2e9a"/></linearGradient>
+          </defs>
+          <circle cx="130" cy="130" r="112" class="g-bg"/>
+          <circle cx="130" cy="130" r="112" class="g-fg" id="gaugeFg"/>
+          <circle cx="130" cy="130" r="92" class="g-inner"/>
+        </svg>
+        <div class="gauge-center">
+          <span class="g-label">אתם מקבלים</span>
+          <span class="g-num num" id="dAmount">5,000</span>
+          <span class="g-unit">עוקבים חדשים</span>
+        </div>
+      </div>
+
+      <div class="board-side">
+        <div class="chance" id="chance" aria-live="polite">
+          <div class="chance-head"><span>❓</span> קלף הזדמנות</div>
+          <h3 id="chanceTitle">⚡ מבצע בזק</h3>
+          <p id="chanceText">5,000 עוקבים במחיר של פיצה משפחתית. ברצינות.</p>
+        </div>
+
+        <div class="range2-wrap">
+          <label for="range2" class="sr-only">בחירת כמות עוקבים לדיל</label>
+          <input type="range" id="range2" class="range2" min="1000" max="20000" step="500" value="5000">
+        </div>
+
+        <div class="props" id="props" role="group" aria-label="חבילות מהירות"></div>
+
+        <div class="deal-price">
+          <div>
+            <span class="dp-old num" id="dOld">189₪</span>
+            <span class="dp-now num" id="dNow">89<small>₪</small></span>
+          </div>
+          <span class="stamp" id="dStamp">חוסכים<br><b class="num">100₪</b></span>
+        </div>
+        <p class="dp-per" id="dPer">רק 17.8₪ לכל 1,000 עוקבים</p>
+
+        <a class="cta-gold" id="dCta" href="#" target="_blank" rel="noopener">
+          <svg class="wa" aria-hidden="true"><use href="#i-wa"/></svg>
+          <span id="dCtaText">תופסים את הדיל בוואטסאפ</span>
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -760,6 +944,36 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
     <span>© <span id="year"></span> Trendify · כל הזכויות שמורות · Trendify אינה קשורה ל-Instagram או ל-Meta.</span>
   </div>
 </footer>
+
+<!-- ================= LUCKY WHEEL ================= -->
+<button type="button" class="wheel-fab" id="wheelFab" aria-haspopup="dialog" aria-controls="wheelModal">
+  <span class="fab-wheel" aria-hidden="true">🎡</span><span class="fab-txt">גלגל המזל</span>
+</button>
+
+<div class="wheel-modal" id="wheelModal" role="dialog" aria-modal="true" aria-labelledby="wheelTitle" aria-describedby="wheelSub" hidden>
+  <div class="wheel-backdrop" data-close></div>
+  <div class="wheel-card" tabindex="-1">
+    <button type="button" class="wheel-x" data-close aria-label="סגירת גלגל המזל">✕</button>
+    <div class="wheel-ribbon">🍀 רק למבקרים באתר</div>
+    <h2 id="wheelTitle">תנסו את המזל!</h2>
+    <p id="wheelSub">חבילות עוקבים במחירי צחוק. סובבו את הגלגל וגלו מה מחכה לכם.</p>
+
+    <div class="wheel-stage">
+      <div class="wheel-pointer" aria-hidden="true"></div>
+      <div class="wheel-lights" aria-hidden="true" id="wheelLights"></div>
+      <svg class="wheel" id="wheel" viewBox="0 0 300 300" aria-hidden="true"></svg>
+      <div class="wheel-hub" aria-hidden="true"><img src="assets/logo.svg" alt=""></div>
+    </div>
+
+    <div class="wheel-result" id="wheelResult" aria-live="assertive"></div>
+    <button type="button" class="wheel-spin" id="wheelSpin">🎰 סובבו את הגלגל</button>
+    <a class="wheel-claim" id="wheelClaim" href="#" target="_blank" rel="noopener" hidden>
+      <svg class="wa" aria-hidden="true"><use href="#i-wa"/></svg>
+      <span>🎁 לממש את הזכייה שלי</span>
+    </a>
+    <p class="wheel-fine" id="wheelFine">סיבוב אחד לכל מבקר · הזכייה נשמרת עבורכם</p>
+  </div>
+</div>
 
 <div class="sticky-cta" id="stickyCta">
   <div class="info"><span id="stickyAmt">10,000 עוקבים</span><small id="stickyPrice">150₪ במקום 250₪</small></div>
@@ -978,7 +1192,7 @@ fillGrid(document.getElementById('liveGrid'),true);
   // sticky mobile bar: visible after hero, hidden while pricing panel is on screen
   const pricing=document.getElementById('pricing'), sticky=document.getElementById('stickyCta');
   let pricingVisible=false;
-  new IntersectionObserver(([e])=>{pricingVisible=e.isIntersecting;tick()},{threshold:0}).observe(pricing);
+  const vis=new Set();const so=new IntersectionObserver(es=>{es.forEach(e=>e.isIntersecting?vis.add(e.target):vis.delete(e.target));pricingVisible=vis.size>0;tick()},{threshold:0});so.observe(pricing);const dz=document.getElementById('deal');if(dz)so.observe(dz);
   function tick(){sticky.classList.toggle('show',scrollY>600 && !pricingVisible)}
   addEventListener('scroll',tick,{passive:true});
 
@@ -989,6 +1203,147 @@ fillGrid(document.getElementById('liveGrid'),true);
     let q=1000;range.value=q;prevVal=q;update(false);
     const iv=setInterval(()=>{q+=500;set(q,true);if(q>=10000)clearInterval(iv)},90);
   },{threshold:.4}).observe(range);
+})();
+
+/* ---------- shared WhatsApp helper ---------- */
+function waText(msg){
+  const base = WHATSAPP_NUMBER ? `https://wa.me/${WHATSAPP_NUMBER}` : 'https://wa.me/';
+  return `${base}?text=${encodeURIComponent(msg)}`;
+}
+
+/* ---------- DEAL ZONE (second slider) ---------- */
+(()=>{
+  const r=document.getElementById('range2'); if(!r) return;
+  const $=id=>document.getElementById(id);
+  const amt=$('dAmount'), now=$('dNow'), old=$('dOld'), stamp=$('dStamp'), per=$('dPer'), cta=$('dCta'), ctaT=$('dCtaText'),
+        chance=$('chance'), cTitle=$('chanceTitle'), cText=$('chanceText'), fg=$('gaugeFg'), props=$('props');
+  const C=2*Math.PI*112; fg.style.strokeDasharray=C;
+  const COLORS=['#8b4513','#5bc0eb','#d93a96','#f7941d','#ed1b24'];
+  TIERS.forEach(([q,p],i)=>{
+    const b=document.createElement('button');b.type='button';b.className='prop';b.style.setProperty('--c',COLORS[i]);b.dataset.q=q;
+    b.innerHTML=`<span class="q num">${short(q)}</span><span class="pr num">${p}₪</span>`;
+    b.setAttribute('aria-label',`${fmt(q)} עוקבים ב-${p} שקלים`);
+    b.onclick=()=>{r.value=q;upd(true)};props.appendChild(b);
+  });
+  function copy(q,p){
+    const pk=(p/q*1000).toFixed(1);
+    if(q<5000) return [0,'🎯 חבילת ההתנעה',`${fmt(q)} עוקבים ב-${p}₪ בלבד. פחות ממחיר של ארוחה, והפרופיל כבר לא נראה ריק.`];
+    if(q<10000) return [1,'⚡ מבצע בזק',`${fmt(q)} עוקבים במחיר של פיצה משפחתית. ברצינות, ${p}₪ וזהו.`];
+    if(q<15000) return [2,'🔥 הדיל הכי נמכר',`פי ${Math.round(q/1000)} מחבילת הבסיס, ומשלמים רק ${pk}₪ לכל 1,000 עוקבים.`];
+    if(q<20000) return [3,'💎 מחיר מטורף',`חמש ספרות בפרופיל ב-${pk}₪ לאלף. המתחרים עוד ישאלו איך עשיתם את זה.`];
+    return [4,'👑 קלף הזהב',`20,000 עוקבים, רושם ראשוני של מותג מוביל. ${pk}₪ לאלף: הדיל הכי משתלם שלנו.`];
+  }
+  let lastB=-1,lastP=null;
+  function upd(user){
+    const q=+r.value, p=priceFor(q), o=p+FAKE_MARKUP, pct=(q-1000)/19000;
+    r.style.setProperty('--p',(pct*100)+'%');
+    fg.style.strokeDashoffset=C*(1-(0.04+pct*0.96));
+    amt.textContent=fmt(q);
+    now.innerHTML=p+'<small>₪</small>'; old.textContent=o+'₪';
+    stamp.innerHTML=`חוסכים<br><b class="num">${FAKE_MARKUP}₪</b>`;
+    per.textContent=`רק ${(p/q*1000).toFixed(1)}₪ לכל 1,000 עוקבים · ${Math.round(FAKE_MARKUP/o*100)}% הנחה`;
+    if(lastP!==null && p!==lastP){[now,stamp].forEach(el=>{el.classList.remove('bump');void el.offsetWidth;el.classList.add('bump')})}
+    lastP=p;
+    const [b,t,x]=copy(q,p);
+    if(b!==lastB){ if(lastB!==-1&&!reduceMotion){chance.classList.remove('flip');void chance.offsetWidth;chance.classList.add('flip');setTimeout(()=>{cTitle.textContent=t},270)} else cTitle.textContent=t; lastB=b }
+    cText.textContent=x;
+    props.querySelectorAll('.prop').forEach(el=>el.classList.toggle('on',+el.dataset.q===q));
+    r.setAttribute('aria-valuetext',`${fmt(q)} עוקבים, ${p} שקלים`);
+    ctaT.textContent=`תופסים ${fmt(q)} עוקבים ב-${p}₪`;
+    cta.href=waText(`היי Trendify! 🔥\nראיתי את הדיל באתר ואני רוצה לתפוס אותו:\n✅ ${fmt(q)} עוקבים לאינסטגרם\n💰 ${p}₪ במקום ${o}₪\nשם המשתמש שלי: @`);
+  }
+  r.addEventListener('input',()=>upd(true));
+  upd(false);
+})();
+
+/* ---------- LUCKY WHEEL ---------- */
+(()=>{
+  const modal=document.getElementById('wheelModal'), fab=document.getElementById('wheelFab'), wheel=document.getElementById('wheel'),
+        spinBtn=document.getElementById('wheelSpin'), claim=document.getElementById('wheelClaim'), result=document.getElementById('wheelResult'),
+        lights=document.getElementById('wheelLights'), fine=document.getElementById('wheelFine');
+  // segments: q = followers (0 = extra spin)
+  const SEG=[{q:1000},{q:0},{q:5000},{q:15000},{q:10000},{q:0},{q:20000},{q:10000}];
+  const FILLS=['#7b2ff7','#ffb347','#c21cf0','#3b1d8f','#ff2e9a','#ffb347','#9b1fd6','#e0218a'];
+  const N=SEG.length, A=360/N, KEY='trendify_wheel_v1';
+  const pt=(r,a)=>[150+r*Math.sin(a*Math.PI/180),150-r*Math.cos(a*Math.PI/180)];
+  let svg='';
+  SEG.forEach((s,i)=>{
+    const a0=i*A,a1=a0+A,[x0,y0]=pt(146,a0),[x1,y1]=pt(146,a1),c=a0+A/2;
+    svg+=`<path d="M150 150 L${x0} ${y0} A146 146 0 0 1 ${x1} ${y1} Z" fill="${FILLS[i]}" stroke="rgba(255,255,255,.25)" stroke-width="1.5"/>`;
+    const dark=!s.q;
+    svg+=`<g transform="rotate(${c} 150 150)">`+(s.q
+      ? `<text x="150" y="46" text-anchor="middle" font-size="19">${short(s.q)}</text><text x="150" y="66" text-anchor="middle" font-size="13" opacity=".9">${priceFor(s.q)}₪</text>`
+      : `<text x="150" y="44" text-anchor="middle" font-size="18" style="fill:#2a1200">🔄</text><text x="150" y="64" text-anchor="middle" font-size="12" style="fill:#2a1200">סיבוב נוסף</text>`)+`</g>`;
+  });
+  svg+=`<circle cx="150" cy="150" r="146" fill="none" stroke="rgba(255,209,102,.6)" stroke-width="3"/>`;
+  wheel.innerHTML=svg;
+  for(let i=0;i<16;i++){const l=document.createElement('i');const a=i*22.5*Math.PI/180;l.style.left=`calc(50% + ${Math.sin(a)*50}% - 4px)`;l.style.top=`calc(50% - ${Math.cos(a)*50}% - 4px)`;lights.appendChild(l)}
+
+  const load=()=>{try{return JSON.parse(localStorage.getItem(KEY))||{stage:0}}catch(e){return {stage:0}}};
+  const save=st=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}};
+  let st=load(), rot=0, spinning=false, lastFocus=null;
+
+  function rotateTo(idx,instant){
+    const c=idx*A+A/2, jitter=(Math.random()-.5)*(A*.55);
+    const base=((-c-rot)%360+360)%360;
+    rot+= (instant?0:360*6) + base + jitter;
+    if(instant){wheel.style.transition='none';wheel.style.transform=`rotate(${rot}deg)`;void wheel.offsetWidth;wheel.style.transition=''}
+    else wheel.style.transform=`rotate(${rot}deg)`;
+  }
+  function prizeMsg(q){const p=priceFor(q),o=p+FAKE_MARKUP;
+    return `היי Trendify! 🎡🍀\nסובבתי את גלגל המזל באתר וזכיתי!\n🎁 הזכייה שלי: ${fmt(q)} עוקבים לאינסטגרם\n💰 במחיר זכייה של ${p}₪ (במקום ${o}₪)\nאשמח לממש את הזכייה. שם המשתמש שלי: @`}
+  function showWin(q){
+    const p=priceFor(q),o=p+FAKE_MARKUP;
+    result.innerHTML=`<div class="win">🎉 המזל איתכם! זכיתם ב:<b>${fmt(q)} עוקבים</b><span class="pp num">${p}₪<s>${o}₪</s></span></div>`;
+    spinBtn.hidden=true; claim.hidden=false; claim.href=waText(prizeMsg(q));
+    fine.textContent='הזכייה שמורה עבורכם. לחצו כדי לשלוח אותה אלינו בוואטסאפ';
+  }
+  function render(){
+    result.innerHTML=''; claim.hidden=true; spinBtn.hidden=false; spinBtn.disabled=false;
+    if(st.stage===0){spinBtn.textContent='🎰 סובבו את הגלגל'}
+    else if(st.stage===1){result.innerHTML='<div class="again">🔄 זכיתם בסיבוב נוסף! המזל מחייך אליכם</div>';spinBtn.textContent='🍀 לסיבוב הנוסף'}
+    else showWin(SEG[st.prize].q);
+  }
+  function spin(){
+    if(spinning||st.stage>=2) return; spinning=true; spinBtn.disabled=true; result.innerHTML='';
+    let idx;
+    if(st.stage===0){ const ex=SEG.map((s,i)=>s.q?-1:i).filter(i=>i>=0); idx=ex[Math.floor(Math.random()*ex.length)] }
+    else { const pz=SEG.map((s,i)=>s.q?i:-1).filter(i=>i>=0); idx=pz[Math.floor(Math.random()*pz.length)] }
+    rotateTo(idx,reduceMotion);
+    setTimeout(()=>{
+      spinning=false;
+      if(st.stage===0){st={stage:1};save(st);render();confetti(40)}
+      else {st={stage:2,prize:idx};save(st);render();confetti(120)}
+    }, reduceMotion?50:5300);
+  }
+  function confetti(n){
+    if(reduceMotion) return;
+    const cols=['#ffd166','#ff2e9a','#7b2ff7','#3ee6ff','#2ee59d','#fff'];
+    for(let i=0;i<n;i++){const c=document.createElement('div');c.className='confetti';c.style.background=cols[i%cols.length];
+      const x=innerWidth/2+(Math.random()-.5)*200, y=innerHeight*.35;document.body.appendChild(c);
+      const dx=(Math.random()-.5)*innerWidth*.9, dy=innerHeight*(.5+Math.random()*.6);
+      c.animate([{transform:`translate(${x}px,${y}px) rotate(0)`,opacity:1},{transform:`translate(${x+dx*.5}px,${y-150-Math.random()*150}px) rotate(${Math.random()*360}deg)`,opacity:1,offset:.3},{transform:`translate(${x+dx}px,${y+dy}px) rotate(${Math.random()*900}deg)`,opacity:0}],{duration:1800+Math.random()*1400,easing:'cubic-bezier(.2,.6,.4,1)'}).onfinish=()=>c.remove()}
+  }
+  function open(){
+    if(!modal.hidden) return; lastFocus=document.activeElement; modal.hidden=false; document.body.style.overflow='hidden';
+    if(st.stage===2) rotateTo(st.prize,true);
+    render(); setTimeout(()=>(st.stage===2?claim:spinBtn).focus(),60);
+    try{sessionStorage.setItem('trendify_wheel_seen','1')}catch(e){}
+  }
+  function close(){modal.hidden=true;document.body.style.overflow='';if(lastFocus&&lastFocus.focus)lastFocus.focus()}
+  fab.onclick=open; spinBtn.onclick=spin;
+  modal.querySelectorAll('[data-close]').forEach(el=>el.addEventListener('click',close));
+  modal.addEventListener('keydown',e=>{
+    if(e.key==='Escape'){close();return}
+    if(e.key!=='Tab') return;
+    const f=[...modal.querySelectorAll('button:not([hidden]),a[href]:not([hidden])')].filter(el=>el.offsetParent);
+    if(!f.length) return; const first=f[0],last=f[f.length-1];
+    if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}
+    else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
+  });
+  // pop up like an ad: once per visit, after a short while on the page
+  let seen=false;try{seen=!!sessionStorage.getItem('trendify_wheel_seen')}catch(e){}
+  if(!seen && st.stage<2) setTimeout(()=>{ if(!document.querySelector('input[type=range]:active')) open() }, 12000);
 })();
 
 /* ---------- reveal on scroll ---------- */
